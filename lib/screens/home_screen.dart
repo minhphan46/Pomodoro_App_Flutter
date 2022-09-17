@@ -32,9 +32,6 @@ class _HomeScreenState extends State<HomeScreen> {
   void didChangeDependencies() {
     _maxSeconds = widget.defaultTime;
     seconds = widget.curentSeconds;
-    print(
-        'media height : ${MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top}');
-    print('media width : ${MediaQuery.of(context).size.width}');
     super.didChangeDependencies();
   }
 

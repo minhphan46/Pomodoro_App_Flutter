@@ -29,24 +29,17 @@ class SettingScreen extends StatefulWidget {
 
 class _SettingScreenState extends State<SettingScreen> {
   @override
-  void didChangeDependencies() {
-    print(
-        'media height2 : ${MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top}');
-    super.didChangeDependencies();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     double heightOfScreen = (mediaQuery.size.height - mediaQuery.padding.top);
     double widthOfScreen = MediaQuery.of(context).size.width;
+
     void setDefaultAllTime() {
-      widget.defaultTime = 25;
-      widget.shortBreakTime = 5;
-      widget.longBreakTime = 20;
-      print(widget.defaultTime);
-      print(widget.shortBreakTime);
-      print(widget.shortBreakTime);
+      setState(() {
+        widget.defaultTime = 25;
+        widget.shortBreakTime = 5;
+        widget.longBreakTime = 20;
+      });
       widget.saveTimeChange(
         widget.defaultTime * 60,
         widget.shortBreakTime * 60,
@@ -113,6 +106,20 @@ class _SettingScreenState extends State<SettingScreen> {
       );
     }
 
+    void increaseTime(int time, Function getTime) {
+      setState(() {
+        (time >= 60) ? time = 0 : time++;
+      });
+      getTime(time);
+    }
+
+    void decreaseTime(int time, Function getTime) {
+      setState(() {
+        (time == 0) ? time = 0 : time--;
+      });
+      getTime(time);
+    }
+
     Widget buildSettingTime(String text, int time, Function getTime) {
       return Container(
         padding: EdgeInsets.only(top: 12, left: 20, right: 20),
@@ -126,7 +133,12 @@ class _SettingScreenState extends State<SettingScreen> {
                 fontSize: 18,
               ),
             ),
-            ChangeTime(time: time, getTime: getTime),
+            ChangeTime(
+              () => increaseTime(time, getTime),
+              () => decreaseTime(time, getTime),
+              time: time,
+              getTime: getTime,
+            ),
           ],
         ),
       );
