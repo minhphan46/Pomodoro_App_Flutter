@@ -260,6 +260,7 @@ class _SettingScreenState extends State<SettingScreen> {
         MyAppBar(
           resetTime: setDefaultAllTime,
           height: heightOfScreen * 0.07,
+          heightOfPaddingTop: mediaQuery.padding.top,
           width: widthOfScreen,
         ),
         SizedBox(

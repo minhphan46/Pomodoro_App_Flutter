@@ -93,7 +93,7 @@ class ClockWidget extends StatelessWidget {
                 child: CircularPercentIndicator(
                   percent: seconds / maxSeconds,
                   radius: height! * 0.42,
-                  lineWidth: 10,
+                  lineWidth: height! * 0.03,
                   progressColor: Colors.white,
                   circularStrokeCap: CircularStrokeCap.round,
                   backgroundColor:

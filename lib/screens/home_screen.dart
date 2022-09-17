@@ -26,12 +26,15 @@ class _HomeScreenState extends State<HomeScreen> {
   int _maxSeconds = 0;
   int seconds = 0;
   Timer? timer;
-  var speed = Duration(milliseconds: 100);
+  var speed = Duration(seconds: 1);
 
   @override
   void didChangeDependencies() {
+    setState(() {});
     _maxSeconds = widget.defaultTime;
     seconds = widget.curentSeconds;
+    //print('meadia height: ${MediaQuery.of(context).size.height}');
+    //print('meadia width: ${MediaQuery.of(context).size.width}');
     super.didChangeDependencies();
   }
 
@@ -111,16 +114,14 @@ class _HomeScreenState extends State<HomeScreen> {
           MyAppBar(
             resetTime: stopTimer,
             height: heightOfScreen * 0.07,
+            heightOfPaddingTop: mediaQuery.padding.top,
             width: widthOfScreen,
           ),
-          SizedBox(
-              height: (heightOfScreen / widthOfScreen >= 1.6)
-                  ? (heightOfScreen * 0.08)
-                  : (heightOfScreen * 0.04)),
+          SizedBox(height: (heightOfScreen * 0.08)),
           ClockWidget(
             seconds: seconds,
             maxSeconds: _maxSeconds,
-            height: (heightOfScreen <= 692) ? 221.44 : (heightOfScreen * 0.32),
+            height: (heightOfScreen * 0.32),
           ),
           SizedBox(height: (heightOfScreen * 0.04)),
           // thanh chon default,  short, long
