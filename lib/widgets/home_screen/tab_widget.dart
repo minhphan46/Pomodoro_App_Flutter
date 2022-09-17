@@ -45,7 +45,7 @@ class _TabWidgetState extends State<TabWidget> {
                   Text('Long break'),
                 ],
                 labelColor: Theme.of(context).colorScheme.primary,
-                labelStyle: GoogleFonts.poppins(fontSize: 17),
+                labelStyle: GoogleFonts.poppins(fontSize: 15),
                 unselectedLabelColor: Colors.black38,
                 unselectedLabelStyle: GoogleFonts.poppins(fontSize: 15),
                 indicator: ContainerTabIndicator(

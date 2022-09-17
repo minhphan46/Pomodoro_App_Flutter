@@ -34,8 +34,8 @@ class MyAppBar extends StatelessWidget {
                 color: Colors.grey[200],
                 borderRadius: BorderRadius.circular(10),
               ),
-              height: height! * 1,
-              width: height! * 1,
+              height: height! * 0.7,
+              width: height! * 0.7,
               child: Container(
                 margin: EdgeInsets.only(top: 2),
                 //height: 10,
