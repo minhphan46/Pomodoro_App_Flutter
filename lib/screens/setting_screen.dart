@@ -264,9 +264,7 @@ class _SettingScreenState extends State<SettingScreen> {
           width: widthOfScreen,
         ),
         SizedBox(
-          height: (heightOfScreen / widthOfScreen >= 1.6)
-              ? (heightOfScreen * 0.08)
-              : (heightOfScreen * 0.017),
+          height: (heightOfScreen * 0.04),
         ),
         builtSetting((heightOfScreen <= 704) ? 373.12 : heightOfScreen * 0.53),
         Expanded(
