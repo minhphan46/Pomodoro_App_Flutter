@@ -6,9 +6,11 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 class ClockWidget extends StatelessWidget {
   final int seconds;
   final int maxSeconds;
+  final double? height;
   ClockWidget({
     required this.seconds,
     required this.maxSeconds,
+    this.height,
   });
 
   Widget buildTime() {
@@ -32,7 +34,7 @@ class ClockWidget extends StatelessWidget {
       style: GoogleFonts.poppins(
         //fontWeight: FontWeight.bold,
         color: Colors.white,
-        fontSize: 48,
+        fontSize: height! * 0.192,
       ),
     );
   }
@@ -44,8 +46,8 @@ class ClockWidget extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           Container(
-            height: 250,
-            width: 250,
+            height: height,
+            width: height,
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.primary,
               shape: BoxShape.circle,
@@ -82,18 +84,23 @@ class ClockWidget extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
-            width: 210,
-            height: 210,
-            child: CircularPercentIndicator(
-              percent: seconds / maxSeconds,
-              radius: 105,
-              lineWidth: 10,
-              progressColor: Colors.white,
-              circularStrokeCap: CircularStrokeCap.round,
-              backgroundColor:
-                  (seconds == 0) ? Colors.white : Colors.transparent,
-              center: buildTime(),
+          Positioned.fill(
+            child: Align(
+              alignment: Alignment.center,
+              child: SizedBox(
+                width: height! * 0.84,
+                height: height! * 0.84,
+                child: CircularPercentIndicator(
+                  percent: seconds / maxSeconds,
+                  radius: height! * 0.42,
+                  lineWidth: 10,
+                  progressColor: Colors.white,
+                  circularStrokeCap: CircularStrokeCap.round,
+                  backgroundColor:
+                      (seconds == 0) ? Colors.white : Colors.transparent,
+                  center: buildTime(),
+                ),
+              ),
             ),
           ),
         ],

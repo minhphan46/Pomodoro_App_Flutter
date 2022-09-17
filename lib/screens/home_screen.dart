@@ -32,6 +32,9 @@ class _HomeScreenState extends State<HomeScreen> {
   void didChangeDependencies() {
     _maxSeconds = widget.defaultTime;
     seconds = widget.curentSeconds;
+    print(
+        'media height : ${MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top}');
+    print('media width : ${MediaQuery.of(context).size.width}');
     super.didChangeDependencies();
   }
 
@@ -76,11 +79,12 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  Widget buildButton() {
+  Widget buildButton(double height) {
     final isRunning = (timer == null ? false : timer!.isActive);
     final isCompleted = (seconds == _maxSeconds || seconds == 0);
     return isRunning || !isCompleted
         ? CircleButtonWidget(
+            height: 100,
             icon: isRunning ? Icons.pause : Icons.play_arrow_rounded,
             onClicked: () {
               if (isRunning) {
@@ -92,6 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           )
         : CircleButtonWidget(
+            height: 100,
             icon: Icons.play_arrow_rounded,
             onClicked: startTimer,
           );
@@ -99,29 +104,44 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              MyAppBar(
-                resetTime: stopTimer,
-              ),
-              const SizedBox(height: 50),
-              ClockWidget(seconds: seconds, maxSeconds: _maxSeconds),
-              const SizedBox(height: 60),
-              // thanh chon default,  short, long
-              TabWidget(setMaxTime),
-            ],
+    final mediaQuery = MediaQuery.of(context);
+    double heightOfScreen = (mediaQuery.size.height - mediaQuery.padding.top);
+    double widthOfScreen = MediaQuery.of(context).size.width;
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          MyAppBar(
+            resetTime: stopTimer,
+            height: heightOfScreen * 0.07,
+            width: widthOfScreen,
           ),
-        ),
-        Positioned(
-          bottom: 30,
-          left: 155,
-          child: buildButton(),
-        ),
-      ],
+          SizedBox(
+              height: (heightOfScreen / widthOfScreen >= 1.6)
+                  ? (heightOfScreen * 0.08)
+                  : (heightOfScreen * 0.04)),
+          ClockWidget(
+            seconds: seconds,
+            maxSeconds: _maxSeconds,
+            height: (heightOfScreen <= 692) ? 221.44 : (heightOfScreen * 0.32),
+          ),
+          SizedBox(height: (heightOfScreen * 0.04)),
+          // thanh chon default,  short, long
+          TabWidget(setMaxTime, width: widthOfScreen),
+          Expanded(
+            child: Align(
+              alignment: FractionalOffset.bottomCenter,
+              child: Padding(
+                padding: EdgeInsets.only(
+                  bottom: heightOfScreen * 0.04,
+                  top: 5,
+                ),
+                child: buildButton(100),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -4,7 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 class TabWidget extends StatefulWidget {
   final Function changeTime;
-  TabWidget(this.changeTime);
+  final double? width;
+  TabWidget(this.changeTime, {this.width});
   @override
   State<TabWidget> createState() => _TabWidgetState();
 }
@@ -17,16 +18,18 @@ class _TabWidgetState extends State<TabWidget> {
       child: Stack(
         // ignore: sort_child_properties_last
         children: [
-          Positioned(
+          Positioned.fill(
             bottom: 1.5,
-            left: 30,
-            child: Container(
-              decoration: BoxDecoration(
-                color: const Color.fromARGB(10, 0, 0, 0),
-                borderRadius: BorderRadius.circular(5),
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(10, 0, 0, 0),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                width: widget.width! * 0.79,
+                height: 9,
               ),
-              width: 325,
-              height: 9,
             ),
           ),
           DefaultTabController(

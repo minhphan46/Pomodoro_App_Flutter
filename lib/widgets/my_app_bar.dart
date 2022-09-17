@@ -3,13 +3,16 @@ import 'package:google_fonts/google_fonts.dart';
 
 class MyAppBar extends StatelessWidget {
   final VoidCallback? resetTime;
-
-  MyAppBar({this.resetTime});
+  final double? height;
+  final double? width;
+  MyAppBar({this.resetTime, this.height, this.width});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 30, vertical: 66),
+      margin: EdgeInsets.symmetric(
+          horizontal: width! * 0.05, vertical: height! * 0.5),
+      height: height,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -29,8 +32,8 @@ class MyAppBar extends StatelessWidget {
                 color: Colors.grey[200],
                 borderRadius: BorderRadius.circular(10),
               ),
-              height: 46,
-              width: 46,
+              height: height! * 1,
+              width: height! * 1,
               child: Container(
                 margin: EdgeInsets.only(top: 2),
                 //height: 10,
@@ -44,28 +47,5 @@ class MyAppBar extends StatelessWidget {
         ],
       ),
     );
-    /* return AppBar(
-      title: Text(
-        'POMODORO',
-        style: GoogleFonts.poppins(
-          color: Theme.of(context).colorScheme.primary,
-          fontWeight: FontWeight.bold,
-          fontSize: 20,
-        ),
-      ),
-      toolbarHeight: 50,
-      elevation: 0,
-      backgroundColor: Colors.white,
-      actions: [
-        IconButton(
-          onPressed: () => resetTime,
-          icon: Icon(
-            Icons.rotate_right_rounded,
-            // size: 100,
-            color: Theme.of(context).colorScheme.primary,
-          ),
-        )
-      ],
-    ); */
   }
 }
